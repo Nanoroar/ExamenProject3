@@ -1,0 +1,1 @@
+Scaffold-DbContext Name="ConnectionStrings:Sql" Microsoft.EntityFrameworkCore.SqlServer -context "DataContext" -ContextDir "Data" -OutputDir "Data/Entities" -DataAnnotations -Force
