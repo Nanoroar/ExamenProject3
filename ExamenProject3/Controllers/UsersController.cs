@@ -81,7 +81,7 @@ namespace ExamenProject3.Controllers
 
                
                 SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("ApiKeys:SecretKey"))),
+                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("SecretKey"))),
                     SecurityAlgorithms.HmacSha512Signature
                     )
             };
@@ -103,7 +103,7 @@ namespace ExamenProject3.Controllers
             return Ok(userToUpdate);
         }
 
-        
+        [Authorize]
         [HttpDelete("Delete/{id}")]
         public async Task<ActionResult> Delete(int id)
         {
