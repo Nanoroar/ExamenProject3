@@ -103,7 +103,7 @@ namespace ExamenProject3.Controllers
             return Ok(userToUpdate);
         }
 
-        [Authorize]
+        
         [HttpDelete("Delete/{id}")]
         public async Task<ActionResult> Delete(int id)
         {
