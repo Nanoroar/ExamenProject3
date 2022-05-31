@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.visible {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+.hide{
+    visibility: hidden;
+}
+
+.nav-item{
+    padding-left:  30px;
+}
