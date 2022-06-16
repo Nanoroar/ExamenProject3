@@ -7,7 +7,7 @@ namespace ExamenProject3.Services
 {
     public interface IOrderService
     {
-        Task<Order> CreateAsync(IEnumerable<Product> shoppingcart, User user);
+        Task<OrderRequest> CreateAsync(IEnumerable<Product> shoppingcart, User user);
     }
     public class OrderService: IOrderService
     {
@@ -20,7 +20,7 @@ namespace ExamenProject3.Services
             _map = map;
         }
 
-        public Task<Order> CreateAsync(IEnumerable<Product> shoppingcart, User user)
+        public Task<OrderRequest> CreateAsync(IEnumerable<Product> shoppingcart, User user)
         {
             throw new NotImplementedException();
         }

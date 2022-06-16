@@ -31,7 +31,7 @@ builder.Services.AddAuthentication(x =>
     {
         OnTokenValidated = context =>
          {
-             if (string.IsNullOrEmpty(context.Principal.Identity.Name))
+             if (string.IsNullOrEmpty(context.Principal?.Identity!.Name))
                  context.Fail("Unauthorized");
 
 

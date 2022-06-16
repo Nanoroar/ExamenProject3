@@ -19,3 +19,28 @@
 .nav-item{
     padding-left:  30px;
 }
+
+.responceOk{
+    box-shadow: 0px 0px 50px 5px green;
+}
+
+.error{
+    box-shadow: 0px 0px 50px 5px red;
+}
+
+main{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1{
+    text-shadow: 0px 0px 5px black;
+}
+
+p[name ="pprice"]::after{
+content: ':-';
+    
+}
+
+p[name="partical"]::before{
+    content: 'Artical: ';
+}

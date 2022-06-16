@@ -33,7 +33,7 @@ namespace ExamenProject3.Controllers
             return Ok(await userService.GetAllAsync());
         }
 
-
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {
@@ -87,7 +87,8 @@ namespace ExamenProject3.Controllers
             };
 
             var accessToken = tokenhandler.WriteToken(tokenhandler.CreateToken(tokenDescriptor));
-            return new OkObjectResult(accessToken); 
+            var userAuthentication = new { userEntity.Id, accessToken };
+            return new OkObjectResult(userAuthentication); 
         }
 
        
