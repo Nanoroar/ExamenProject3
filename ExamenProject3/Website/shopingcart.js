@@ -3,21 +3,7 @@ let shopingCartItems = document.getElementById('shopingCartItems');
 let proceedToPayButton = document.getElementById('proceedToPay');
 var shopingCartEnteries = [];
 
-// shopingCartItems.addEventListener('click', function (e) {
-//     if (e.target.className == "btn btn-link px-2 border buttonminus") {
-//         e.target.parentNode.querySelector("[type='number']").stepDown();
-//         // if(e.target.parentNode.querySelector("[type='number']").value == '0'){
 
-//         // }
-//     }
-
-//     // if(e.target.className == "btn btn-link px-2 border buttonplus"){
-//     //     // e.target.parentNode.querySelector("[type='number']").stepUp();
-//     //     addQuantity(index)
-//     // }
-
-
-// })
 
 if (localStorage.getItem('Shopingcart') != null) {
     shopingCartEnteries = JSON.parse(localStorage.getItem('Shopingcart'));
@@ -51,7 +37,7 @@ function AdditemsToShopingCart() {
                     <a class="btn btn-link px-2 border buttonplus" onclick="addQuantity(${index})"><i class="fas fa-plus"></i></a>
                 </div>
                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-2 offset-lg-2">
-                    <h6 class="mb-0 ">${data.productPrice * data.quantity}</h6>
+                    <h6 class="mb-0 price">${data.productPrice * data.quantity}</h6>
                 </div>
                 <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                     <a href="#!" class="text-danger px-2" onclick="trash(${index})"><i class="fas fa-trash fa-lg"></i></a>
@@ -63,7 +49,11 @@ function AdditemsToShopingCart() {
 
     });
     shoppingItems.innerText = shopingCartEnteries.length;
+    total();
 }
+
+
+
 AdditemsToShopingCart();
 
 function deleteItem(index) {
@@ -79,6 +69,7 @@ function deleteItem(index) {
     localStorage.setItem('Shopingcart', JSON.stringify(shopingCartEnteries));
     AdditemsToShopingCart();
     shoppingItems.innerText = shopingCartEnteries.length;
+    total();
 }
 
 function addQuantity(index) {
@@ -87,6 +78,7 @@ function addQuantity(index) {
     shopingCartEnteries[index].quantity = Number(document.getElementsByClassName("form-control form-control-sm")[index].value);
     localStorage.setItem('Shopingcart', JSON.stringify(shopingCartEnteries));
     AdditemsToShopingCart();
+    total();
 }
 
 function trash(index) {
@@ -95,6 +87,7 @@ function trash(index) {
     localStorage.setItem('Shopingcart', JSON.stringify(shopingCartEnteries));
     document.querySelectorAll(".text-danger.px-2")[index].parentNode.parentNode.remove;
     AdditemsToShopingCart();
+    total();
 }
 
 //========================function logout ===================
@@ -155,7 +148,7 @@ function checkIfLogin() {
     let shopingcart = JSON.parse(localStorage.getItem('Shopingcart'));
 
     for(let item of shopingcart){
-        orderrows.push({orderId: orderid, articaleNumber:item.articalNumber, productName:item.productName, quantity: item.quantity, productPrice:item.productPrice })
+        orderrows.push({customerId:Number(localStorage.getItem('userId')), orderId: orderid, articaleNumber:item.articalNumber, productName:item.productName, quantity: item.quantity, productPrice:item.productPrice })
     }
     let rows = JSON.stringify(orderrows);
     fetch('https://localhost:7047/api/OrderRows', {
@@ -169,15 +162,28 @@ function checkIfLogin() {
     .then(data => {
         proceedToPayButton.classList.add('hidden');
         shopingCartItems.innerHTML =`<h3>${data} , Thanks for buying from ApiStore</h3>`;
-        localStorage.removeItem('Shopingcart');
+        // localStorage.removeItem('Shopingcart');
         setTimeout(() => {
            location.assign('index.html') ;
         }, 8000);
     });
 
+    }).catch((err) => {
+        loginHeader.textContent = 'OBs something went wrong please try to log in again';
+        return;
     });
 
 
 
 }
 
+
+//================================================================================
+function total(){
+    var sum = 0;
+    let pricelements = document.getElementsByClassName('mb-0 price');
+    for(let element of pricelements){
+        sum += parseFloat(element.textContent);
+    }
+    document.getElementsByClassName('col total')[0].textContent = 'Total: ' + sum + ":-";
+}

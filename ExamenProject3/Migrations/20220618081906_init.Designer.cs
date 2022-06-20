@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamenProject3.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220520221742_init")]
+    [Migration("20220618081906_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,11 +60,21 @@ namespace ExamenProject3.Migrations
 
             modelBuilder.Entity("ExamenProject3.Models.Order.OrderRowEntity", b =>
                 {
-                    b.Property<int>("OrderId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
                     b.Property<string>("ArticaleNumber")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
@@ -76,7 +86,9 @@ namespace ExamenProject3.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("OrderId", "ArticaleNumber");
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("OrderRows");
                 });

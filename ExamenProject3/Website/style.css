@@ -33,7 +33,7 @@ main{
 }
 
 h1{
-    text-shadow: 0px 0px 5px black;
+    text-shadow: 0px 0px 5px rgb(49, 23, 1);
 }
 
 p[name ="pprice"]::after{

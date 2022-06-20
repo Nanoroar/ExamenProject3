@@ -5,8 +5,10 @@ namespace ExamenProject3.Models.Order
 {
     public class OrderRowEntity
     {
+        [Key]
+        public int Id { get; set; }
         [Required]
-        public int OrderId { get; set; }
+        public int CustomerId { get; set; }
         [Required]
         public string ArticaleNumber { get; set; } = null!;
         [Required]
@@ -17,6 +19,8 @@ namespace ExamenProject3.Models.Order
         [Column(TypeName="money")]
         public decimal ProductPrice { get; set; }
 
+        [Required]
+        public int OrderId { get; set; }
         public OrderEntity Order { get; set; } = null!;
     }
 }

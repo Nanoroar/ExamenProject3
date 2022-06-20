@@ -1,5 +1,31 @@
 let productlist = document.getElementById('productlist');
 
+//=======================Create new Product=============================
+function handleSubmit(e) {
+    e.preventDefault();
+
+    let product = {
+        ArticleNumber: e.target["articalenum"].value,
+        Name: e.target["name"].value,
+        Price: Number(e.target["price"].value),
+        CategoryName: e.target["categoryname"].value
+    }
+
+    let json = JSON.stringify(product);
+
+    fetch('https://localhost:7047/api/Products', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            'key': '2b25bd2f-3503-4bf3-8831-27d4f2a035b7'
+        },
+        body: json
+    })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .then(() => { location.reload() })
+
+}
 //======================Get All Products CP.html===================================
 const getAllProducts = () => {
     fetch('https://localhost:7047/api/Products', {

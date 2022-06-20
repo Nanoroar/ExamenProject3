@@ -104,15 +104,18 @@ namespace ExamenProject3.Migrations
                 name: "OrderRows",
                 columns: table => new
                 {
-                    OrderId = table.Column<int>(type: "int", nullable: false),
-                    ArticaleNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    ArticaleNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    ProductPrice = table.Column<decimal>(type: "money", nullable: false)
+                    ProductPrice = table.Column<decimal>(type: "money", nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderRows", x => new { x.OrderId, x.ArticaleNumber });
+                    table.PrimaryKey("PK_OrderRows", x => x.Id);
                     table.ForeignKey(
                         name: "FK_OrderRows_Orders_OrderId",
                         column: x => x.OrderId,
@@ -120,6 +123,11 @@ namespace ExamenProject3.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderRows_OrderId",
+                table: "OrderRows",
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",

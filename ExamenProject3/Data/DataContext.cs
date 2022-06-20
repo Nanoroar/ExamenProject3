@@ -25,16 +25,5 @@ namespace ExamenProject3.Data
 
         public virtual DbSet<UserAddressEntity> Addresses { get; set; } = null!;
 
-
-
-
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<OrderRowEntity>()
-                .HasKey(c => new { c.OrderId, c.ArticaleNumber });
-        }
     }
 }

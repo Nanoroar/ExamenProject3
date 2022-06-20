@@ -22,11 +22,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
-    <script src="script.js" defer></script>
-    <title>ApiStore</title>
+    <script src="orders.js" defer></script>
+    <title>Orders</title>
 </head>
 
-<body>
+<body onload="getOreders();">
     <!--content start-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
         <div class="container-fluid">
@@ -66,9 +66,10 @@
 
 
     <main class="container bilder mt-5 text-light shadow-lg ">
-        <section class="row justify-content-around flex-wrap" id="listallproducts">
-            <h1 class="text-center mt-5 mb-5" >Welcome to ApiStore</h1>
-          
+        <h1 class="text-center pt-4 mt-5 mb-4" >Orders</h1>
+        <section class="row justify-content-around flex-wrap" id="listallOrders">
+            
+           
         </section>
     </main>
         
