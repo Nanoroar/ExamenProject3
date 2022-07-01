@@ -2,6 +2,7 @@ using ExamenProject3.Data;
 using ExamenProject3.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -54,12 +55,15 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment()) 
+if (app.Environment.IsProduction()) 
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+
+app.UseSwagger();
+app.UseSwaggerUI();
 //CORS
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 

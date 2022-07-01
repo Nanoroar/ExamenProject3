@@ -68,12 +68,12 @@ namespace ExamenProject3.Controllers
         [HttpGet("Customer/{id}")]
         public async Task<IActionResult> GetByCustomerId(int id)
         {
-            var allUserOrders = await _dataContext.OrderRows.Where(or => or.Order.CustomerId == id).ToListAsync();
+            var allUserOrders = await _dataContext.OrderRows.Where(or => or.CustomerId == id).ToListAsync();
             var orderRows = new List<OrderRowModel>();
             var order = new OrderEntity();
             if (allUserOrders.Count == 0)
                 return BadRequest("You have no orders yet");
-            foreach (var orderrow in await _dataContext.OrderRows.ToListAsync())
+            foreach (var orderrow in allUserOrders)
             {
                 order = await _dataContext.Orders.FindAsync(orderrow.OrderId);
                 orderRows.Add(new OrderRowModel

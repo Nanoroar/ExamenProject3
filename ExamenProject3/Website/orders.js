@@ -3,22 +3,22 @@ let loginText = document.getElementById('loginText');
 
 
 
-function getOreders() {
+function getOrders() {
     if (!localStorage.getItem('accessToken')) {
         alert('Please log in to see your orders');
         return;
     }
 
-    fetch(`https://localhost:7047/api/OrderRows/Customer/${localStorage.getItem('userId')}`, {
+    fetch(`https://examenproject320220622044116.azurewebsites.net/api/OrderRows/Customer/${localStorage.getItem('userId')}`, {
         method: 'get',
         headers: {
             "Content-Type": "application/json",
             "Authorization": `bearer ${localStorage.getItem('accessToken')}`
         }
 
-    }).then(res => res.json())
+    }).then(res =>  res.json())
         .then((data) => {
-
+           
             listallOrders.innerHTML = '';
             for (let order of data) {
                 listallOrders.innerHTML += `<div class="card rounded-3 text-dark">
@@ -48,7 +48,10 @@ function getOreders() {
             </div>
             </div>`;
             }
-        });
+        }).catch(err => {listallOrders.innerHTML = err});
+     
+        
+
 }
 
 
@@ -81,7 +84,7 @@ confirmLogin();
 ///=====================================function delete item from order==================
 
 function trash(id) {
-    fetch(`https://localhost:7047/api/OrderRows/deleterow/${id}`, {
+    fetch(`https://examenproject320220622044116.azurewebsites.net/api/OrderRows/deleterow/${id}`, {
         method: 'delete',
         headers: {
             "Content-Type": "application/json",
@@ -89,7 +92,10 @@ function trash(id) {
         }
     }).then(res => res.text())
         .then(data => {
+            getOrders();
             alert(data);
-            getOreders();
+           
+                 
+
         });
 }

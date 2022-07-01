@@ -40,7 +40,7 @@ function getProfileInfo() {
         return;
     }
 
-    fetch(`https://localhost:7047/api/Users/${localStorage.getItem('userId')}`, {
+    fetch(`https://examenproject320220622044116.azurewebsites.net/api/Users/${localStorage.getItem('userId')}`, {
         method: "get",
         headers: {
             "Content-Type": "application/json",
@@ -72,7 +72,7 @@ function UpdateProfileinfo(e) {
 
     let json = JSON.stringify(user);
 
-    fetch(`https://localhost:7047/api/Users/update/${localStorage.getItem('userId')}`, {
+    fetch(`https://examenproject320220622044116.azurewebsites.net/api/Users/update/${localStorage.getItem('userId')}`, {
         method: 'put',
         headers: {
             "Content-Type": "application/json",
@@ -85,7 +85,7 @@ function UpdateProfileinfo(e) {
 function DeleteProfile() {
     let r = confirm('Are you sure? you are going to delete your account?')
     if (r) {
-        fetch(`https://localhost:7047/api/Users/Delete/${localStorage.getItem('userId')}`, {
+        fetch(`https://examenproject320220622044116.azurewebsites.net/api/Users/Delete/${localStorage.getItem('userId')}`, {
             method: 'delete',
             headers: {
                 "Content-Type": "application/json",
@@ -132,7 +132,7 @@ function checkIfLogin() {
 
 //======================Get All Products index.html===================================
 const showAllProducts = () => {
-    fetch('https://localhost:7047/api/Products', {
+    fetch('https://examenproject320220622044116.azurewebsites.net/api/Products', {
         method: "Get",
         headers: {
             "Content-Type": "application/json"
@@ -199,7 +199,7 @@ function handleSignUp(e) {
 
     let json = JSON.stringify(user);
 
-    fetch('https://localhost:7047/api/users/signup', {
+    fetch('https://examenproject320220622044116.azurewebsites.net/api/users/signup', {
         method: 'post',
         headers: { "Content-Type": "application/json" },
         body: json
@@ -227,7 +227,7 @@ function handleLogin(e) {
     }
     json = JSON.stringify(inLogInfo);
 
-    fetch('https://localhost:7047/api/users/signin', {
+    fetch('https://examenproject320220622044116.azurewebsites.net/api/users/signin', {
         method: 'post',
         headers: { "Content-Type": "application/json" },
         body: json
@@ -238,13 +238,22 @@ function handleLogin(e) {
             localStorage.setItem('userId', data.id);
             if (localStorage.getItem('accessToken') !== null) {
                 loginHeader.textContent = 'Loged in successfully!';
+                if(!loginHeader.classList.contains('text-success')){
+                    loginHeader.classList.add('text-success');
+                }
                 setTimeout(() => { location.assign('index.html') }, 2000);
             } else {
                 loginHeader.textContent = 'Wrong email or password';
+                if(!loginHeader.classList.contains('text-danger')){
+                    loginHeader.classList.add('text-danger');
+                }
                 return;
             }
         }).catch((err) => {
             loginHeader.textContent = 'Wrong email or password';
+            if(!loginHeader.classList.contains('text-danger')){
+                loginHeader.classList.add('text-danger');
+            }
             return;
         });
 }

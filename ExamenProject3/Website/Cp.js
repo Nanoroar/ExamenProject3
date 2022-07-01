@@ -13,7 +13,7 @@ function handleSubmit(e) {
 
     let json = JSON.stringify(product);
 
-    fetch('https://localhost:7047/api/Products', {
+    fetch('https://examenproject320220622044116.azurewebsites.net/api/Products', {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ function handleSubmit(e) {
 }
 //======================Get All Products CP.html===================================
 const getAllProducts = () => {
-    fetch('https://localhost:7047/api/Products', {
+    fetch('https://examenproject320220622044116.azurewebsites.net/api/Products', {
         method: "Get",
         headers: {
             "Content-Type": "application/json"
@@ -91,7 +91,7 @@ function handleUpdate(e) {
 
     let json = JSON.stringify(product);
 
-    fetch('https://localhost:7047/api/Products/artnr?artnr=' + artnr, {
+    fetch('https://examenproject320220622044116.azurewebsites.net/api/Products/artnr?artnr=' + artnr, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
@@ -123,7 +123,7 @@ productlist.addEventListener('click', function (e) {
     if (e.target.className == 'btn btn-danger col') {
         const artnr = e.target.parentElement.parentElement.childNodes[1].id;
 
-        fetch('https://localhost:7047/api/Products/' + artnr, {
+        fetch('https://examenproject320220622044116.azurewebsites.net/api/Products/' + artnr, {
             method: 'Delete',
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',

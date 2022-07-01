@@ -134,7 +134,7 @@ function checkIfLogin() {
 
     let json = JSON.stringify(order);
 
-    fetch('https://localhost:7047/api/Orders', {
+    fetch('https://examenproject320220622044116.azurewebsites.net/api/Orders', {
         method: 'post',
         headers: {
             "Content-Type": "application/json",
@@ -151,7 +151,7 @@ function checkIfLogin() {
         orderrows.push({customerId:Number(localStorage.getItem('userId')), orderId: orderid, articaleNumber:item.articalNumber, productName:item.productName, quantity: item.quantity, productPrice:item.productPrice })
     }
     let rows = JSON.stringify(orderrows);
-    fetch('https://localhost:7047/api/OrderRows', {
+    fetch('https://examenproject320220622044116.azurewebsites.net/api/OrderRows', {
         method: 'post',
         headers: {
             "Content-Type": "application/json",
@@ -162,7 +162,7 @@ function checkIfLogin() {
     .then(data => {
         proceedToPayButton.classList.add('hidden');
         shopingCartItems.innerHTML =`<h3>${data} , Thanks for buying from ApiStore</h3>`;
-        // localStorage.removeItem('Shopingcart');
+        localStorage.removeItem('Shopingcart');
         setTimeout(() => {
            location.assign('index.html') ;
         }, 8000);
