@@ -1,34 +1,49 @@
+let BaseUrl = 'https://examenproject320220622044116.azurewebsites.net/api';
 let productlist = document.getElementById('productlist');
+const logintext = document.getElementById('loginText');
 
+function checkIfLogin(){
+    if(localStorage.getItem('adminkey'))
+    {
+        logintext.innerHTML = 'Log out <i class="fa fa-user"></i>'
+        logintext.addEventListener('click', ()=>{
+            localStorage.clear();
+            location.assign('Admin.html');
+        });
+    }else{
+        location.assign('Empty.html');
+    }
+}
+checkIfLogin()
 //=======================Create new Product=============================
 function handleSubmit(e) {
     e.preventDefault();
 
     let product = {
-        ArticleNumber: e.target["articalenum"].value,
-        Name: e.target["name"].value,
-        Price: Number(e.target["price"].value),
-        CategoryName: e.target["categoryname"].value
+        articleNumber: e.target["articalenum"].value,
+        name: e.target["name"].value,
+        price: Number(e.target["price"].value),
+        categoryName: e.target["categoryname"].value
     }
 
     let json = JSON.stringify(product);
 
-    fetch('https://examenproject320220622044116.azurewebsites.net/api/Products', {
+    fetch(`${BaseUrl}/Products`, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
-            'key': '2b25bd2f-3503-4bf3-8831-27d4f2a035b7'
+            'key': localStorage.getItem('adminkey'),
+            "Authorization": `bearer ${localStorage.getItem('adminAccessToken')}`
         },
         body: json
     })
         .then(res => res.json())
-        .then(data => console.log(data))
         .then(() => { location.reload() })
 
 }
 //======================Get All Products CP.html===================================
 const getAllProducts = () => {
-    fetch('https://examenproject320220622044116.azurewebsites.net/api/Products', {
+    fetch(`${BaseUrl}/Products`, {
         method: "Get",
         headers: {
             "Content-Type": "application/json"
@@ -91,16 +106,17 @@ function handleUpdate(e) {
 
     let json = JSON.stringify(product);
 
-    fetch('https://examenproject320220622044116.azurewebsites.net/api/Products/artnr?artnr=' + artnr, {
+    fetch(`${BaseUrl}/Products/artnr?artnr=` + artnr, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
-            'key': '2b25bd2f-3503-4bf3-8831-27d4f2a035b7'
+            'key': localStorage.getItem('adminkey'),
+            "Authorization": `bearer ${localStorage.getItem('adminAccessToken')}`
         },
         body: json
 
     })
-        .then(res => { location.reload() });
+        .then(() => { location.reload() });
 
 }
 
@@ -123,15 +139,16 @@ productlist.addEventListener('click', function (e) {
     if (e.target.className == 'btn btn-danger col') {
         const artnr = e.target.parentElement.parentElement.childNodes[1].id;
 
-        fetch('https://examenproject320220622044116.azurewebsites.net/api/Products/' + artnr, {
+        fetch(`${BaseUrl}/Products/` + artnr, {
             method: 'Delete',
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
-                'key': '2b25bd2f-3503-4bf3-8831-27d4f2a035b7'
+                'key': localStorage.getItem('adminkey'),
+                "Authorization": `bearer ${localStorage.getItem('adminAccessToken')}`
             }
 
         })
-            .then(res => { location.reload() });
+            .then(()=> { location.reload() });
     }
 
 })

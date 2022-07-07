@@ -2,6 +2,7 @@
 using ExamenProject3.Filters;
 using ExamenProject3.Models.Product;
 using ExamenProject3.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +10,7 @@ namespace ExamenProject3.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+    [Authorize(Roles ="Admin")]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -22,7 +23,7 @@ namespace ExamenProject3.Controllers
            
         }
 
-        [HttpGet]
+        [HttpGet, AllowAnonymous]
 
         public async Task<IActionResult> GetAll()
         {

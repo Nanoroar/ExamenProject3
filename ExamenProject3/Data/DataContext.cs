@@ -1,4 +1,6 @@
-﻿using ExamenProject3.Models.Order;
+﻿
+using ExamenProject3.Models.Admin;
+using ExamenProject3.Models.Order;
 using ExamenProject3.Models.Product;
 using ExamenProject3.Models.User;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +26,8 @@ namespace ExamenProject3.Data
         public virtual DbSet<UserEntity> Users { get; set; } = null!;
 
         public virtual DbSet<UserAddressEntity> Addresses { get; set; } = null!;
+
+        public virtual DbSet<Admin> Admins { get; set; }
 
     }
 }

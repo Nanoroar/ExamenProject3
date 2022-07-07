@@ -1,4 +1,5 @@
 ﻿
+let BaseUrl = 'https://examenproject320220622044116.azurewebsites.net/api';
 let lielements = document.getElementsByClassName('row mt-1 border border-top-0 border-primary');
 let allproducts = document.getElementById('listallproducts');
 let shoppingItems = document.getElementById('shoppingItems');
@@ -40,7 +41,7 @@ function getProfileInfo() {
         return;
     }
 
-    fetch(`https://examenproject320220622044116.azurewebsites.net/api/Users/${localStorage.getItem('userId')}`, {
+    fetch(`${BaseUrl}/Users/${localStorage.getItem('userId')}`, {
         method: "get",
         headers: {
             "Content-Type": "application/json",
@@ -72,7 +73,7 @@ function UpdateProfileinfo(e) {
 
     let json = JSON.stringify(user);
 
-    fetch(`https://examenproject320220622044116.azurewebsites.net/api/Users/update/${localStorage.getItem('userId')}`, {
+    fetch(`${BaseUrl}/Users/update/${localStorage.getItem('userId')}`, {
         method: 'put',
         headers: {
             "Content-Type": "application/json",
@@ -83,9 +84,9 @@ function UpdateProfileinfo(e) {
 }
 //=========================function delete account====================
 function DeleteProfile() {
-    let r = confirm('Are you sure? you are going to delete your account?')
+    let r = confirm('Are you sure? you are going to delete your account?');
     if (r) {
-        fetch(`https://examenproject320220622044116.azurewebsites.net/api/Users/Delete/${localStorage.getItem('userId')}`, {
+        fetch(`${BaseUrl}/Users/Delete/${localStorage.getItem('userId')}`, {
             method: 'delete',
             headers: {
                 "Content-Type": "application/json",
@@ -132,7 +133,7 @@ function checkIfLogin() {
 
 //======================Get All Products index.html===================================
 const showAllProducts = () => {
-    fetch('https://examenproject320220622044116.azurewebsites.net/api/Products', {
+    fetch(`${BaseUrl}/Products`, {
         method: "Get",
         headers: {
             "Content-Type": "application/json"
@@ -199,7 +200,7 @@ function handleSignUp(e) {
 
     let json = JSON.stringify(user);
 
-    fetch('https://examenproject320220622044116.azurewebsites.net/api/users/signup', {
+    fetch(`${BaseUrl}/users/signup`, {
         method: 'post',
         headers: { "Content-Type": "application/json" },
         body: json
@@ -227,7 +228,7 @@ function handleLogin(e) {
     }
     json = JSON.stringify(inLogInfo);
 
-    fetch('https://examenproject320220622044116.azurewebsites.net/api/users/signin', {
+    fetch(`${BaseUrl}/users/signin`, {
         method: 'post',
         headers: { "Content-Type": "application/json" },
         body: json
@@ -259,7 +260,7 @@ function handleLogin(e) {
 }
 
 
-
-
+// export {BaseUrl};
 
 ///==========================function add items to the shoping cart shopingCart.html==============================
+

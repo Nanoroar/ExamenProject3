@@ -1,3 +1,6 @@
+let BaseUrl = 'https://examenproject320220622044116.azurewebsites.net/api';
+
+
 let listallOrders = document.getElementById('listallOrders');
 let loginText = document.getElementById('loginText');
 
@@ -9,7 +12,7 @@ function getOrders() {
         return;
     }
 
-    fetch(`https://examenproject320220622044116.azurewebsites.net/api/OrderRows/Customer/${localStorage.getItem('userId')}`, {
+    fetch(`${BaseUrl}/OrderRows/Customer/${localStorage.getItem('userId')}`, {
         method: 'get',
         headers: {
             "Content-Type": "application/json",
@@ -84,7 +87,7 @@ confirmLogin();
 ///=====================================function delete item from order==================
 
 function trash(id) {
-    fetch(`https://examenproject320220622044116.azurewebsites.net/api/OrderRows/deleterow/${id}`, {
+    fetch(`${BaseUrl}/OrderRows/deleterow/${id}`, {
         method: 'delete',
         headers: {
             "Content-Type": "application/json",

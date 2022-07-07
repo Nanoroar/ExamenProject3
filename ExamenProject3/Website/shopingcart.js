@@ -1,3 +1,5 @@
+let BaseUrl = 'https://examenproject320220622044116.azurewebsites.net/api';
+
 let loginText = document.getElementById('loginText');
 let shopingCartItems = document.getElementById('shopingCartItems');
 let proceedToPayButton = document.getElementById('proceedToPay');
@@ -134,7 +136,7 @@ function checkIfLogin() {
 
     let json = JSON.stringify(order);
 
-    fetch('https://examenproject320220622044116.azurewebsites.net/api/Orders', {
+    fetch(`${BaseUrl}/Orders`, {
         method: 'post',
         headers: {
             "Content-Type": "application/json",
@@ -151,7 +153,7 @@ function checkIfLogin() {
         orderrows.push({customerId:Number(localStorage.getItem('userId')), orderId: orderid, articaleNumber:item.articalNumber, productName:item.productName, quantity: item.quantity, productPrice:item.productPrice })
     }
     let rows = JSON.stringify(orderrows);
-    fetch('https://examenproject320220622044116.azurewebsites.net/api/OrderRows', {
+    fetch(`${BaseUrl}/OrderRows`, {
         method: 'post',
         headers: {
             "Content-Type": "application/json",
