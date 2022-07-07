@@ -24,7 +24,7 @@ if(svar.ok){
     localStorage.setItem('adminAccessToken', data.token);
     loginHeader.textContent = "loged in Successfully";
     setTimeout(() => {
-       location.assign('Cp.html') ;
+       location.assign('CP.html') ;
     }, 3000);
     console.log(data);
 }
